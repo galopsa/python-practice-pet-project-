@@ -1,1 +1,1 @@
-# python-practice-pet-project-
+# python practice | pet-project
