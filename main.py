@@ -1,21 +1,22 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import FastAPI, Body
+from gemini_client import get_answer_from_gemini
+from db import Base, engine
+from contextlib import asynccontextmanager
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    Base.metadata.create_all(engine)
+    print("все таблицы созданы")
+    yield
 
-# Модель данных для POST
-class Prompt(BaseModel):
-    prompt: str
 
-# Временная функция, чтобы Swagger не ломался
-def get_answer_from_gemini(prompt: str) -> str:
-    return f"Ты отправил: {prompt}"
+app = FastAPI(lifespan=lifespan)
 
 @app.get("/requests")
 def get_my_requests():
-    return "Hello world"
-
+    return "HellO"
 @app.post("/requests")
-def send_prompt(data: Prompt):
-    answer = get_answer_from_gemini(data.prompt)
+def send_prompt(
+        prompt: str = Body(embed=True)):
+    answer = get_answer_from_gemini(prompt)
     return {"answer": answer}

@@ -8,5 +8,4 @@ def get_answer_from_gemini(prompt: str):
         model="gemini-2.5-flash-lite",
         contents=prompt,
     )
-
-   return response.text
+    return response.text
