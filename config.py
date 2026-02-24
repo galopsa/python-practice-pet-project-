@@ -1,3 +1,3 @@
 class Config:
-    gemini_api_key = "AIzaSyCKa0SRiN6Y5RNMKldjSSegnlT5fOhCU54"
+    gemini_api_key = "AIzaSyBMb_dv1zBjqr-GhJoN-BDe3mhvSv34cd0"
 config_obj = Config()
